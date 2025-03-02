@@ -9,33 +9,20 @@
 <body>	
 	<script>
 		function secondHighest(arr) {
-			let ans = -Infinity;
-			if(arr==null || arr.length==1 || arr.length) return ans;
-arr = arr.map(Number);
-			let flag=true;
-			for(let i=1;i<arr.length;i++){
-				if(arr[i-1]==arr[i]){
-					flag=true;
-				}
-				else{
-					flag=false;
-				}
-			}
+			if (!arr || arr.length < 2) return -Infinity;
 
-			if(flag==true) return ans;
+    let first = -Infinity, second = -Infinity;
 
-			let maxi1=-Infinity;
-			for(let x of arr){
-				maxi1=Math.max(x,maxi1);
-			}
+    for (let num of arr) {
+        if (num > first) {
+            second = first;
+            first = num;
+        } else if (num > second && num !== first) {
+            second = num;
+        }
+    }
 
-			let maxi2=-Infinity;
-			for(let x of arr){
-				if(x>maxi2 && x!=maxi1){
-					maxi2 =  Math.max(x,maxi2);
-				}
-			}
-			return maxi2;
+    return second === -Infinity ? -Infinity : second;
 		}
 
 		function Main() {
